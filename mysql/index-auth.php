@@ -108,8 +108,8 @@ if(isset($uriSegments[1])){
 		break;
 
 		case 'pages':
-			require_once("controllers/SitesController.php");
-			$site = new SitesController();
+			require_once("controllers/SiteController.php");
+			$site = new SiteController();
 			switch($request_method){
 				case 'GET':
 					if(!isset($uriSegments[2])|| $uriSegments[2]==''){

@@ -1,19 +1,18 @@
 <?php		
 class ProductsModel{
-	var $result;
-	var $conn;
+	
+	var $Connection;
 
 	function __construct(){
-		require_once("db/ConnectClass.php");
-		$Oconn = new ConnectClass();
-		$Oconn -> openConnect();
-		$this -> conn = $Oconn -> getConnect();
+		require_once('db/ConnectClass.php');
+        $ConnectClass = new ConnectClass();
+        $ConnectClass -> openConnect();
+        $this -> Connection = $ConnectClass -> getConnection();
 	}
 			
 	public function listProducts(){
 		$sql = "SELECT * FROM products";			
-		$this -> result = $this -> conn -> query($sql);	
-			
+		return $this -> Connection -> query($sql);	
 	}
 
 	public function consultProduct($idProduct){
@@ -21,7 +20,7 @@ class ProductsModel{
 			SELECT * FROM products 
 			WHERE idProduct = {$idProduct}
 		;";	
-		$this -> result = $this -> conn -> query($sql);			
+		return $this -> Connection -> query($sql);			
 	}
 
 	public function consultProductsCategory($idCategory){
@@ -29,13 +28,7 @@ class ProductsModel{
 			SELECT * FROM products 
 			WHERE idCategory = {$idCategory}
 		;";	
-		$this -> result = $this -> conn -> query($sql);			
-	}
-
-	
-	public function getConsult()
-	{
-		return $this -> result;
+		return $this -> Connection -> query($sql);			
 	}
 }
 ?>

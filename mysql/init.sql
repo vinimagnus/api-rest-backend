@@ -134,7 +134,7 @@ INSERT INTO `products` (`idProduct`, `name`, `price`, `description`, `idCategory
 CREATE TABLE `users` (
   `idUser` int NOT NULL,
   `name` varchar(50) NOT NULL,
-  `user` varchar(20) NOT NULL,
+  `userName` varchar(20) NOT NULL,
   `password` varchar(20) NOT NULL,
   `admin` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
@@ -143,7 +143,7 @@ CREATE TABLE `users` (
 -- Despejando dados para a tabela `users`
 --
 
-INSERT INTO `users` (`idUser`, `name`, `user`, `password`, `admin`) VALUES
+INSERT INTO `users` (`idUser`, `name`, `userName`, `password`, `admin`) VALUES
 (1, 'Administrador', 'adm', 'adm', 1),
 (2, 'Usuário comun', 'usr', 'usr', 0);
 

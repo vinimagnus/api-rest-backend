@@ -1,13 +1,13 @@
 <?php		
-class ContactsModel{
-	var $result;
-	var $conn;
+class ContactModel{
+	
+	var $Connection;
 
 	function __construct(){
-		require_once("db/ConnectClass.php");
-		$Oconn = new ConnectClass();
-		$Oconn -> openConnect();
-		$this -> conn = $Oconn -> getConnect();
+		require_once('db/ConnectClass.php');
+        $ConnectClass = new ConnectClass();
+        $ConnectClass -> openConnect();
+        $this -> Connection = $ConnectClass -> getConnection();
 	}
 			
 	public function listContacts($search){
@@ -21,7 +21,7 @@ class ContactsModel{
 			OR description LIKE '%{$search}%'
 			";
 		}			
-		$this -> result = $this -> conn -> query($sql);				
+		return $this -> Connection -> query($sql);				
 	}
 
 	public function consultContact($idContact){
@@ -29,7 +29,7 @@ class ContactsModel{
 			SELECT * FROM contacts 
 			WHERE idContact = {$idContact}
 		;";	
-		$this -> result = $this -> conn -> query($sql);			
+		return $this -> Connection -> query($sql);			
 	}
 
 	public function insertContact($arrayContact){
@@ -41,16 +41,13 @@ class ContactsModel{
 				'{$arrayContact['message']}',
 				'0',
 				''
-
 			)
 		;";		
-		$this -> conn -> query($sql);
-		
-		$this -> result = $this -> conn -> insert_id;
+		$this -> Connection -> query($sql);
+		return $this -> Connection -> insert_id;
 	}
 
-	public function updateContact($arrayContact)
-	{
+	public function updateContact($arrayContact){
 		$sql = "
 			UPDATE contacts SET 
 				status = {$arrayContact['status']},
@@ -58,8 +55,7 @@ class ContactsModel{
 			WHERE
 				idContact = {$arrayContact['idContact']}
 		;";		
-		$this -> conn -> query($sql);
-		
+		$this -> Connection -> query($sql);
 	}
 
 	public function deleteContact($idContact){
@@ -68,13 +64,7 @@ class ContactsModel{
 			WHERE
 				idContact = {$idContact}
 		;";		
-
-		$this -> conn -> query($sql);
-	}
-
-	public function getConsult()
-	{
-		return $this -> result;
+		$this -> Connection -> query($sql);	
 	}
 }
 ?>

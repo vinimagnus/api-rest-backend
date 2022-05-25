@@ -1,0 +1,14 @@
+Inicial:
+https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04
+FTP:
+https://www.digitalocean.com/community/tutorials/how-to-set-up-vsftpd-for-a-user-s-directory-on-ubuntu-20-04
+Docker
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-20-04 
+Docker COmpose
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-compose-on-ubuntu-20-04-pt
+
+
+root
+#65ZTp7n!GNmh3q
+
+159.223.8.27

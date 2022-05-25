@@ -1,38 +1,38 @@
 <?php 
-class UsersController{
+class UserController{
+
 	function __construct(){
-		require_once("models/UsersModel.php");
-		$this -> UserModel = new UsersModel();
+		require_once("models/UserModel.php");
+		$this -> UserModel = new UserModel();
 	}
 
 	public function login(){
 		$userData = json_decode(file_get_contents("php://input"));
-		
-		if(isset($userData -> user) && isset($userData -> pass)){
-			$this -> UserModel -> consultUser($userData -> user);
-			$result = $this -> UserModel -> getConsult();
-			
-			if ($line = $result->fetch_assoc()){	
-				if ($line['password'] == $userData -> pass){			
+		if(isset($userData -> userName) && isset($userData -> password)){
+			$result = $this -> UserModel -> consultUser($userData -> userName);
+			if ($user = $result->fetch_assoc()){	
+				if ($user['password'] == $userData -> password){			
 					
-					$token = $this -> createJWT($line);
+					$token = $this -> createJWT($user);
 					header('Content-Type: application/json');	
-					echo ('{"acess":"true","token":"'.$token.'"}');
+					echo ('{"access":"true","token":"'.$token.'"}');
 					
 				}
-				else{ //Senha incorreta!				 
+				else{ 				 
 					header('Content-Type: application/json');	
-					echo ('{"acess":"false","message":"xx"}');
+					echo ('{"access":"false","message":"senha inválida"}');
 				}	
-			}else{ //senão é sinal que o usuário digitado não existe
+			}else{ 
 				header('Content-Type: application/json');	
-				echo ('{"acess":"false","message":"xx"}');
+				echo ('{"access":"false","message":"usuário inválido"}');
 			}	
+		}else{
+			header('Content-Type: application/json');	
+			echo ('{"access":"false","message":"faltam dados de acessos"}');
 		}
 	}
 
-	public function createJWT($user)
-	{
+	public function createJWT($user){
 		$header = [
 			'alg' => 'HS256',
 			'typ' => 'JWT'
@@ -59,10 +59,7 @@ class UsersController{
 		
 	}
 
-	public function checkJWT($headers)
-	{
-		
-		
+	public function checkJWT($headers){
 		if(isset($headers['Authorization'])){
 			
 			$token = $headers['Authorization'];

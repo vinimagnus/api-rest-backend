@@ -1,13 +1,13 @@
 <?php		
-class ClientsModel{
-	var $result;
-	var $conn;
+class ClientModel{
+	
+	var $Connection;
 
 	function __construct(){
-		require_once("db/ConnectClass.php");
-		$Oconn = new ConnectClass();
-		$Oconn -> openConnect();
-		$this -> conn = $Oconn -> getConnect();
+		require_once('db/ConnectClass.php');
+        $ConnectClass = new ConnectClass();
+        $ConnectClass -> openConnect();
+        $this -> Connection = $ConnectClass -> getConnection();
 	}
 			
 	public function listClients($search){
@@ -21,9 +21,7 @@ class ClientsModel{
 			OR address LIKE '%{$search}%'
 			";
 		}
-
-		$this -> result = $this -> conn -> query($sql);	
-				
+		return $this -> Connection -> query($sql);			
 	}
 
 	public function consultClient($idClient){
@@ -31,8 +29,7 @@ class ClientsModel{
 			SELECT * FROM clients 
 			WHERE idClient = {$idClient}
 		;";	
-
-		$this -> result = $this -> conn -> query($sql);			
+		return $this -> Connection -> query($sql);			
 	}
 
 	public function insertClient($arrayClient){
@@ -45,10 +42,8 @@ class ClientsModel{
 				'{$arrayClient['address']}'
 			)
 		;";		
-		
-		$this -> conn -> query($sql);
-
-		$this -> result = $this -> conn -> insert_id;
+		$this -> Connection -> query($sql);
+		return $this -> Connection -> insert_id;
 	}
 
 	public function updateClient($arrayClient){
@@ -63,7 +58,7 @@ class ClientsModel{
 					idClient={$arrayClient['idClient']}
 		;";
 		
-		$this -> result = $this -> conn-> query($sql);	
+		return $this -> Connection -> query($sql);	
 	}		
 
 	public function deleteClient($idClient){
@@ -72,12 +67,7 @@ class ClientsModel{
 			where 
 				idClient={$idClient};
 		";
-		$this -> result = $this -> conn -> query($sql);
+		return $this -> Connection -> query($sql);
 	}			
-	
-	public function getConsult()
-	{
-		return $this -> result;
-	}
 }
 ?>

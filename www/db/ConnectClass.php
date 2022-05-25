@@ -2,7 +2,7 @@
 
 class ConnectClass{
 
-    var $conn;
+    var $Connection;
 
     public function openConnect(){
        $serverName = 'db';
@@ -10,16 +10,14 @@ class ConnectClass{
        $password = '1q2w3e4r5t';
        $dbName = 'pw_exemple';
 
-       $this -> conn = new mysqli($serverName, $userName, $password, $dbName);
+       $this -> Connection = new mysqli($serverName, $userName, $password, $dbName);
 
-
-        if($this -> conn -> connect_error){
+        if($this -> Connection -> connect_error){
             die("Conexão com o Banco de Dados falhou -> ". $this -> conn -> connect_error);
         }
        
     }
-    public function getConnect()
-    {
-        return $this -> conn;
+    public function getConnection(){
+        return $this -> Connection;
     }
 }

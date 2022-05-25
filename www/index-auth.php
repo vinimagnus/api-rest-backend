@@ -11,16 +11,16 @@ $uri = $_SERVER['PHP_SELF'];
 $rout = str_replace($local, "", $uri);
 $uriSegments = explode("/", $rout);
 
-require_once("controllers/UsersController.php");
-$user = new UsersController();
+require_once("controllers/UserController.php");
+$user = new UserController();
 
 
 
 if(isset($uriSegments[1])){	
 	switch($uriSegments[1]){
-		case 'contacts':
-			require_once("controllers/ContactsController.php");
-			$contact = new ContactsController();
+		case 'contact':
+			require_once("controllers/ContactController.php");
+			$contact = new ContactController();
 			switch($request_method){
 				case 'GET':
 					if($user->isAdmin()){
@@ -51,9 +51,9 @@ if(isset($uriSegments[1])){
 			}
 		break;	
 
-		case 'clients':
-			require_once("controllers/ClientsController.php");
-			$client = new ClientsController();
+		case 'client':
+			require_once("controllers/ClientController.php");
+			$client = new ClientController();
 			switch($request_method){
 				case 'GET':
 					if(!isset($uriSegments[2])|| $uriSegments[2]==''){
@@ -80,9 +80,9 @@ if(isset($uriSegments[1])){
 			}
 		break;	
 
-		case 'products':
-			require_once("controllers/ProductsController.php");
-			$product = new ProductsController();
+		case 'product':
+			require_once("controllers/ProductController.php");
+			$product = new ProductController();
 			
 			switch($request_method){
 				case 'GET':
@@ -107,9 +107,9 @@ if(isset($uriSegments[1])){
 			}
 		break;
 
-		case 'pages':
-			require_once("controllers/SitesController.php");
-			$site = new SitesController();
+		case 'page':
+			require_once("controllers/SiteController.php");
+			$site = new SiteController();
 			switch($request_method){
 				case 'GET':
 					if(!isset($uriSegments[2])|| $uriSegments[2]==''){
@@ -122,9 +122,9 @@ if(isset($uriSegments[1])){
 			}
 		break;
 
-		case 'users':
-			require_once("controllers/UsersController.php");
-			$user = new UsersController();
+		case 'user':
+			require_once("controllers/UserController.php");
+			$user = new UserController();
 			switch($request_method){
 				case 'GET':
 					if(!isset($uriSegments[2]) || $uriSegments[2] =='' ){
