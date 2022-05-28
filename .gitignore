@@ -3,4 +3,4 @@
 
 database/mysql/*
 database/logs/*
-config.txt
+config_server.txt
