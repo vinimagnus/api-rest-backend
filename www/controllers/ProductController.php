@@ -2,7 +2,7 @@
 class ProductController{
 
 	function __construct(){
-		require_once("models/ProductsModel.php");
+		require_once("models/ProductModel.php");
 		$this -> ProductModel = new ProductsModel();
 	}
 
@@ -18,7 +18,7 @@ class ProductController{
 		echo json_encode($arrayProducts);	
 	}
 
-	public function consultProduct($idProduct){
+	public function listProduct($idProduct){
 		$result = $this -> ProductModel -> consultProduct($idProduct);
 		
 		$product = $result->fetch_assoc();			
@@ -26,7 +26,7 @@ class ProductController{
 		header('Content-Type: application/json');
 		echo json_encode($product);
 	}
-	public function consultProductsCategory($idCategory){
+	public function listProductsCategory($idCategory){
 		
 		$result = $this -> ProductModel -> consultProductsCategory($idCategory);
 		$arrayProducts = array();
